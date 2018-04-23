@@ -1,0 +1,12 @@
+version: "3.4"
+
+services:
+  sports_api:
+    build:
+      context: .
+      target: prod
+    image: josephsiefers/sports_api:prod
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      - RAILS_ENV=production
