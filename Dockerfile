@@ -38,24 +38,14 @@ RUN mv /tmp/Gemfile.lock /home/app
 
 CMD /sbin/my_init -- bundle exec puma -b tcp://127.0.0.1:8080
 
-#FROM base as test
+FROM prod as dev
 
-#RUN bundle install --without development
+#reset bundle settings
+RUN rm -rf .bundle
+RUN bundle install
 
-#RUN mv .bundle /home/app/.bundle
+WORKDIR /home/app/
 
-#WORKDIR /home/app/
+COPY --chown=app:app . /home/app
 
-#COPY --chown=app:app . /home/app
-
-#CMD bundle exec rspec
-
-#FROM test as dev
-
-#RUN bundle install
-
-#WORKDIR /home/app/
-
-#COPY --chown=app:app . /home/app
-
-#CMD /sbin/my_init -- bundle exec puma -b tcp://127.0.0.1:8080
+CMD /sbin/my_init -- bundle exec puma -b tcp://127.0.0.1:8080
