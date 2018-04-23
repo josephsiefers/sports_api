@@ -18,5 +18,13 @@ services:
     image: josephsiefers/sports_api:dev
     ports:
       - "127.0.0.1:8080:8080"
+    depends_on:
+      - db
     volumes:
       - .:/home/app
+
+  db:
+    image: mysql:5.7
+    container_name: sports_api_db
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
