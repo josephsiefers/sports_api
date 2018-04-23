@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y tzdata --no-install-recommends && apt-g
 
 #This hack prevents bundle install from taking forever except when changes are made
 #to the Gemfile
-#Gems are still installed in the regular gemdir (/usr/local/rvm/gems/ruby-2.2.5)
+#Gems are still installed in the regular gemdir (/usr/local/rvm/gems/ruby-2.3.7)
 WORKDIR /tmp
 
 COPY --chown=app:app Gemfile /tmp
@@ -36,7 +36,7 @@ COPY --chown=app:app ./Rakefile /home/app/Rakefile
 RUN mv /tmp/Gemfile /home/app
 RUN mv /tmp/Gemfile.lock /home/app
 
-CMD /sbin/my_init -- bundle exec puma -b tcp://127.0.0.1:8080
+CMD /sbin/my_init -- bundle exec puma -b tcp://0.0.0.0:8080
 
 FROM prod as dev
 
@@ -48,4 +48,4 @@ WORKDIR /home/app/
 
 COPY --chown=app:app . /home/app
 
-CMD /sbin/my_init -- bundle exec puma -b tcp://127.0.0.1:8080
+CMD /sbin/my_init -- bundle exec puma -b tcp://0.0.0.0:8080
