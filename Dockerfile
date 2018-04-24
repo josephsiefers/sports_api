@@ -12,6 +12,8 @@ COPY --chown=app:app Gemfile.lock /tmp/Gemfile.lock
 
 FROM base as prod
 
+#reset bundle settings
+RUN rm -rf .bundle
 RUN bundle install --without development test
 
 #preserve bundler exclude settings at bundle exec runtime
@@ -43,8 +45,6 @@ FROM prod as dev
 #reset bundle settings
 RUN rm -rf .bundle
 RUN bundle install
-
-WORKDIR /home/app/
 
 COPY --chown=app:app . /home/app
 
