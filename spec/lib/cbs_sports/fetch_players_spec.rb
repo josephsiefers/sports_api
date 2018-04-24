@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe CbsSports::FetchPlayers do
-  describe ".fetch" do
+  describe "#fetch" do
 
     it "raises an error when given an invalid type" do
       VCR.use_cassette("invalid_request") do
