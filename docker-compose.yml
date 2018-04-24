@@ -28,3 +28,5 @@ services:
     container_name: sports_api_db
     environment:
       - MYSQL_ROOT_PASSWORD=password
+    ports:
+      - "127.0.0.1:3307:3306"
