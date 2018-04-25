@@ -1,24 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Import players:
+docker-compose run sports_api_dev bundle exec rake db:create
+docker-compose run sports_api_dev bundle exec rake db:migrate
+docker-compose run sports_api_dev script/import_players.rb
 
-Things you may want to cover:
+Bring up server:
+docker-compose up sports_api_dev
 
-* Ruby version
+(Requires port 8080 and 3307 to be available)
 
-* System dependencies
+View JSON output:
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+http://localhost:8080/players/?type=football
+http://localhost:8080/players/?type=baseball
+http://localhost:8080/players/?type=basketball
